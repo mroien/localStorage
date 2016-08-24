@@ -15,9 +15,13 @@
         <script src="src/js/vendor/jquery3.1.js"></script>
         <script src="src/js/main.js"></script>
         <script>
-            $(document).ready(function () {
-                localStorage.clear();
-            })
+            if(typeof Storage == 'undefined'){
+                alert('Sorry Local Storage does not work on this browser');
+            } else {
+                $(document).ready(function () {
+                    localStorage.clear();
+                })
+            }
         </script>
     </head>
     <body>
