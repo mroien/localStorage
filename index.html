@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title></title>
+        <title>Test Form</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,8 @@
         <link rel="stylesheet" href="src/css/main.css">
         <script src="src/js/vendor/modernizr-2.8.3.min.js"></script>
         <script src="src/js/vendor/jquery3.1.js"></script>
-        <script src="src/js/main.js"></script>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script>
             if(typeof Storage == 'undefined'){
                 alert('Sorry Local Storage does not work on this browser');
@@ -29,6 +30,14 @@
                 form[0].reset();
             })
         </script>
+        <script>
+            $('#yes').click(function() {
+//                if( $(this).is(':checked')) {
+                    $(".donation").removeClass('hide');
+//                }
+            });
+        </script>
+
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -36,18 +45,33 @@
                 <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-
-        <form method="get" name="localStorage" id="form" autocomplete="off" action="src/pages/confirmation.html">
-            <fieldset class="form-group">
-                <label for="firstName">First Name:</label>
-                <input type="text" id="firstName" class="firstName form-control-success" name="firstName"
-                       pattern="[a-zA-Z]{0,20}" placeholder="First Name" maxlength="20" autofocus required><br>
-                <label for="firstName">Last Name:</label>
-                <input type="text" id="lastName" class="lastName form-control-success" name="lastName"
-                       pattern="[a-zA-Z]{0,20}" placeholder="Last Name" maxlength="20" required><br>
-            </fieldset>
-            <button type="submit" id="submit" class="btn btn-primary">Submit</button>
-        </form>
+        <h1>Test form to use Local Storage</h1>
+            <form method="get" name="localStorage" id="form" autocomplete="off" action="src/pages/confirmation.html">
+                <fieldset class="form-group">
+                    <label for="firstName" data-toggle="tooltip" title="Fill out your First Name" data-placement="left">First Name:</label>
+                    <input type="text" id="firstName" class="firstName form-control-success" name="firstName"
+                           pattern="[a-zA-Z]{0,20}" placeholder="First Name" maxlength="20" autofocus required><br>
+                    <label for="lastName" data-toggle="tooltip" title="Fill out your Last Name" data-placement="left">Last Name:</label>
+                    <input type="text" id="lastName" class="lastName form-control-success" name="lastName"
+                           pattern="[a-zA-Z]{0,20}" placeholder="Last Name" maxlength="20" required><br>
+                    <label for="areaCode" data-toggle="tooltip" title="Fill out your Phone Number" data-placement="left">Phone:</label>
+                    <input type="tel" id="areaCode" class="areaCode form-control-success" name="areaCode"
+                           pattern="[0-9]{3}" maxlength="3" size="3" required>-
+                    <input type="tel" id="firstPhone" class="firstPhone form-control-success" name="firstPhone"
+                           pattern="[0-9]{3}" maxlength="3" size="3" required>-
+                    <input type="tel" id="secondPhone" class="secondPhone form-control-success" name="secondPhone"
+                           pattern="[0-9]{4}" maxlength="4" size="4" required><br>
+                    <label for="email" data-toggle="tooltip" title="Fill out your Email Address" data-placement="left">Email:</label>
+                    <input type="email" id="email" class="email form-control-success" name="email"
+                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}" placeholder="Email Address" required><br>
+                    <label>Do you want to donate money to Tim? Or skip it.</label>
+                    <label for="yes"><input type="checkbox" value="yes" id="yes"> Yes</label>
+                    <label for="donation" class="hide donation">Thank You. How much would you like to donate</label>
+                    <input type="number" id="donation" class="donation hide form-control-success" name="donation">
+                </fieldset>
+                <button type="submit" id="submit" class="btn btn-success">Submit</button>
+                <button type="reset" id="reset" class="btn btn-danger">Reset</button>
+            </form>
 
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -64,6 +88,38 @@
                 });
             });
         </script>
+        <script>
+            var container = document.getElementsByTagName("form")[0];
+            container.onkeyup = function(e) {
+                var target = e.srcElement;
+                var maxLength = parseInt(target.attributes["maxlength"].value, 10);
+                var myLength = target.value.length;
+                if (myLength >= maxLength) {
+                    var next = target;
+                    while (next = next.nextElementSibling) {
+                        if (next == null)
+                            break;
+                        if (next.tagName.toLowerCase() == "input") {
+                            next.focus();
+                            break;
+                        }
+                    }
+                }
+            }
+        </script>
+        <script>
+            $(document).ready(function(){
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+        </script>
+        <script>
+            $('#yes').click(function () {
+                if($('#yes').is(":checked"))
+                    $('.donation').toggleClass('hide');
+            })
+        </script>
+
+
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

@@ -21,9 +21,18 @@
             } else {
                 var firstName = localStorage.getItem('firstName');
                 var lastName = localStorage.getItem('lastName');
+                var areaCode = localStorage.getItem('areaCode');
+                var firstPhone = localStorage.getItem('firstPhone');
+                var secondPhone = localStorage.getItem('secondPhone');
+                var email = localStorage.getItem('email');
+                var donation = localStorage.getItem('donation');
 
-                document.getElementById('firstName').innerHTML = 'First name is ' + firstName;
-                document.getElementById('lastName').innerHTML = 'Last name is ' + lastName;
+                document.getElementById('name').innerHTML = 'Your name is ' + firstName + ' ' + lastName;
+                document.getElementById('phone').innerHTML = 'Phone number is (' + areaCode + ') ' + firstPhone + '-' + secondPhone;
+                document.getElementById('email').innerHTML = 'Email is ' + email;
+                if (!donation == '') {
+                    document.getElementById('donation').innerHTML = 'Thanks you for donating ' + donation;
+                }
             }
         });
     </script>
@@ -34,9 +43,14 @@
     <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<div id="firstName"></div>
-<div id="lastName"></div>
-<a href="../../index.html" class="btn btn-info" role="button">Link Button</a>
+    <h1>The information you entered</h1>
+    <div id="confirmation">
+        <div id="name"></div>
+        <div id="phone"></div>
+        <dv id="email"></dv><br>
+        <div id="donation"></div>
+        <a href="../../index.html" class="btn btn-info" role="button">Back Home</a>
+    </div>
 
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
